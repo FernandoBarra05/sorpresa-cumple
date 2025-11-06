@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños, Mi Amor!</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <audio id="background-music" src="assets/tu-musica.mp3" loop></audio>
+
+    <div class="scroll-container">
+
+        <section class="screen" id="intro">
+            <div id="intro-background-overlay"></div>
+            
+            <div class="balloons-container">
+                </div>
+
+            <div class="intro-content">
+                <h1 class="fade-in">
+                    <span>¡Feliz Cumpleaños</span>
+                    <span class="sparkle">✨</span>
+                </h1>
+                <h2 class="fade-in delay-1">mi Chinita!</h2>
+                <div class="cake-icon fade-in delay-2">🎂</div>
+            </div>
+
+            <div class="scroll-down-prompt">
+                <span>Desliza</span>
+                <div class="arrow"></div>
+            </div>
+        </section>
+
+        <section class="screen" id="message">
+            <div class="message-card animated-section">
+                <h3>Para mi Corazón de Mango:</h3>
+                <p>
+                    Quiero que sepas que me siento muy dichoso de tenerte a mi lado, espero que el día de hoy sea de tu agrado, nunca olvides lo orgulloso que me siento por ti, en tan poco tiempo estás consiguiendo cosas muy importantes y me alegra estar a tu lado en todo este proceso de crecimiento, nunca olvides que puedes contar conmigo para siempre, nunca olvides que soy tu eterno admirador.
+                </p>
+            </div>
+        </section>
+
+        <section class="screen" id="visual">
+            <div class="visual-content animated-section">
+                <div class="couple-animation">
+                    <img src="assets/pareja.gif" alt="Animación de nosotros">
+                </div>
+                <p class="subtitle">Tú y yo, siempre.</p>
+            </div>
+        </section>
+
+        <section class="screen" id="finale">
+            <div class="finale-content animated-section">
+                <h1>¡Te amo mi Chinita!</h1>
+                <div class="heart-pulse">❤️</div>
+            </div>
+            <button id="confetti-button">¡Presiona aquí!</button>
+        </section>
+
+    </div>
+    
+    <div id="falling-hearts-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,429 @@
+/* --- 🎨 Diseño Base y Fondo Mágico --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Ocultamos el scroll del body */
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+body {
+    background: linear-gradient(-45deg, #ffc3a0, #ffafbd, #ffc3a0, #ffd6a0);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- 📜 Contenedor de Scrollytelling --- */
+.scroll-container {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth; /* Deslizamiento más suave */
+}
+
+.screen {
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1; /* Aseguramos que el contenido esté encima de cualquier fondo de sección */
+}
+
+/* --- 🌟 Sección 1: Introducción Mejorada --- */
+#intro {
+    background: transparent;
+    overflow: hidden; /* Importante para que los globos salgan de la pantalla */
+}
+
+#intro-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2; /* Para que esté por encima de globos y overlay */
+}
+
+#intro h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5.5rem; /* Tamaño para desktop */
+    font-weight: 700;
+    margin: 0;
+    color: #ffd700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.7), 0 0 5px rgba(0,0,0,0.5);
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#intro h1 span:first-child {
+    background: linear-gradient(90deg, #ffd700, #ffec8b, #ffd700);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 3s linear infinite;
+}
+
+@keyframes shineText {
+    to { background-position: -200% center; }
+}
+
+.sparkle {
+    font-size: 0.8em;
+    vertical-align: super;
+    animation: sparkleEffect 1.5s infinite alternate;
+}
+
+@keyframes sparkleEffect {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+#intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 3.5rem; /* Tamaño para desktop */
+    margin: 10px 0 0 0;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+
+.cake-icon {
+    font-size: 4rem; /* Tamaño para desktop */
+    margin-top: 30px;
+    animation: bounceIn 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Globos emergiendo - Ajuste de animación */
+.balloons-container {
+    position: absolute;
+    bottom: -100px; /* Inicia fuera de la pantalla, abajo */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.balloon {
+    position: absolute;
+    width: 70px;
+    height: 90px;
+    background: radial-gradient(circle at 30% 30%, #fff, var(--balloon-color));
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2);
+    opacity: 0.8;
+    animation: floatUp var(--float-duration) ease-in-out forwards;
+    animation-delay: var(--float-delay);
+}
+
+.balloon::before { /* El nudo del globo */
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: var(--balloon-color);
+    border-radius: 2px;
+}
+.balloon::after { /* El hilo del globo */
+    content: '';
+    position: absolute;
+    bottom: -60px; /* Extiende el hilo un poco más */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 50px; /* Longitud del hilo */
+    background: rgba(255,255,255,0.7);
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0.8; }
+    100% { transform: translateY(-120vh); opacity: 0; } /* Sube más allá de la pantalla */
+}
+
+
+/* Flecha para deslizar -- Más clara y animada */
+.scroll-down-prompt {
+    position: absolute;
+    bottom: 5%;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    z-index: 10;
+    animation: fadeIn 2s ease-in 2s forwards;
+    opacity: 0;
+}
+.arrow {
+    width: 30px;
+    height: 30px;
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
+    transform: rotate(45deg);
+    margin: 15px auto 0;
+    animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+    40% { transform: translateY(15px) rotate(45deg); }
+    60% { transform: translateY(7px) rotate(45deg); }
+}
+
+
+/* --- 💌 Sección 2: El Mensaje --- */
+#message {
+    background: rgba(0,0,0,0.05);
+}
+.message-card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    padding: 40px; /* Padding para desktop */
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.message-card h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2em; /* Tamaño para desktop */
+    color: #d6336c;
+    margin-top: 0;
+}
+.message-card p {
+    font-size: 1.15em; /* Tamaño para desktop */
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* --- 💖 Sección 3: Visual de Pareja --- */
+.visual-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.couple-animation img {
+    width: 250px; /* Tamaño para desktop */
+    height: 250px;
+    border-radius: 50%;
+    border: 8px solid white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    background: white;
+}
+.subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.5em;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+/* --- 💥 Sección 4: El Final --- */
+#finale h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4.5rem; /* Tamaño para desktop */
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+}
+.heart-pulse {
+    font-size: 5rem; /* Tamaño para desktop */
+    animation: heartBeat 1s infinite;
+}
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+#confetti-button {
+    margin-top: 30px;
+    padding: 20px 40px; /* Padding para desktop */
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color: #d6336c;
+    background: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+#confetti-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+
+/* --- ✨ Animaciones de entrada (Fade-in) --- */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+}
+.delay-1 { animation-delay: 1.5s; }
+.delay-2 { animation-delay: 2.5s; }
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* Animaciones para las secciones que aparecen al deslizar */
+.animated-section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.animated-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 🌧️ Lluvia de Corazones 3D al final --- */
+#falling-hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* No bloquear interacción */
+    z-index: 99; /* Debajo del confeti, pero encima del contenido */
+    overflow: hidden; /* Para que los corazones no creen barras de scroll */
+}
+
+.falling-heart {
+    position: absolute;
+    font-size: 2em;
+    color: var(--heart-color); /* Color variable */
+    opacity: 0;
+    animation: fallAndRotate var(--fall-duration) linear forwards;
+    animation-delay: var(--fall-delay);
+    transform-origin: center center; /* Para rotar desde el centro */
+    text-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+@keyframes fallAndRotate {
+    0% {
+        transform: translate3d(var(--start-x), -10vh, var(--z-depth)) rotateY(0deg) rotateX(0deg);
+        opacity: 0;
+    }
+    10% { opacity: var(--initial-opacity); }
+    100% {
+        transform: translate3d(var(--end-x), 110vh, var(--z-depth)) rotateY(var(--y-rotation)) rotateX(var(--x-rotation));
+        opacity: 0;
+    }
+}
+
+
+/*
+============================================================
+--- 📱 DISEÑO RESPONSIVO (PARA CELULARES) ---
+============================================================
+*/
+@media (max-width: 768px) {
+    /* Ajustes para tabletas y celulares grandes */
+    
+    #intro h1 { font-size: 4.5rem; }
+    #intro h2 { font-size: 3rem; }
+    .message-card { 
+        padding: 30px; 
+        max-width: 90vw; /* Usa el 90% del ancho de la pantalla */
+    }
+    #finale h1 { font-size: 4rem; }
+    .couple-animation img { width: 220px; height: 220px; }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes específicos para celulares */
+    
+    #intro h1 {
+        font-size: 3.2rem; /* Reduce drásticamente el texto */
+        white-space: normal; /* Permite que se parta en dos líneas si es necesario */
+    }
+    #intro h2 {
+        font-size: 2.2rem;
+    }
+    .cake-icon {
+        font-size: 3rem;
+    }
+    
+    .scroll-down-prompt {
+        font-size: 1em; /* Texto de desliza más pequeño */
+    }
+    .arrow {
+        width: 25px;
+        height: 25px;
+    }
+
+    .message-card {
+        padding: 25px; /* Menos padding en la tarjeta */
+        max-width: 90vw;
+    }
+    .message-card h3 {
+        font-size: 1.8em;
+    }
+    .message-card p {
+        font-size: 1em; /* Tamaño de letra base para legibilidad */
+        text-align: left; /* A menudo más fácil de leer en móvil */
+    }
+
+    .couple-animation img {
+        width: 200px; /* Imagen de pareja más pequeña */
+        height: 200px;
+    }
+    .subtitle {
+        font-size: 1.2em;
+    }
+
+    #finale h1 {
+        font-size: 2.8rem;
+    }
+    .heart-pulse {
+        font-size: 4rem;
+    }
+    
+    #confetti-button { 
+        padding: 18px 30px; 
+        font-size: 1em; 
+        width: 80%; /* Botón más ancho para que sea fácil de presionar */
+    }
+
+    /* Reducir el tamaño de los globos en móviles */
+    .balloon {
+        width: 50px;
+        height: 70px;
+    }
+}
